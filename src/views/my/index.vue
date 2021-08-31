@@ -58,7 +58,10 @@
     </van-grid>
 
     <van-cell title="消息通知" is-link/>
-    <van-cell class="mb-9" title="小智同学" is-link/>
+    <van-cell class="mb-9" title="实名认证" is-link/>
+    <van-cell title="用户反馈" is-link />
+    <van-cell class="mb-9" title="小智同学" is-link />
+    <van-cell class="mb-9" title="系统设置" is-link />
     <van-cell
       v-if="user"
       class="logout-cell"
@@ -127,9 +130,6 @@ export default {
     height: 361px;
     background: url('~@/assets/banner.png') no-repeat;
     background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   .not-login {
@@ -203,6 +203,7 @@ export default {
     }
     .data-stats {
       display: flex;
+      justify-content:flex-end;
       .data-item {
         height: 130px;
         flex: 1;
