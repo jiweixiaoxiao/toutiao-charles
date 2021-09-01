@@ -1,6 +1,12 @@
 <template>
   <div class="login-container">
-    <van-nav-bar class="page-nav-bar" title="登陆"/>
+    <van-nav-bar class="page-nav-bar" title="登陆">
+      <van-icon
+        slot="left"
+        name="cross"
+        @click="$router.back()"
+      />
+    </van-nav-bar>
     <van-form ref="loginForm">
       <van-field
         v-model="user.mobile"
