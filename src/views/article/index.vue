@@ -89,9 +89,15 @@
         info="123"
         color="#777"
       />
-      <van-icon
-        color="#777"
-        name="star-o"
+      <collect-article
+        class="btn-item"
+        v-model="article.is_collected"
+        :article-id="article.art_id"
+      />
+      <like-article
+        class="btn-item"
+        v-model="article.attitude"
+        :article-id="article.art_id"
       />
       <van-icon
         color="#777"
@@ -107,10 +113,14 @@
 import { getArticleById } from '@/api/article'
 import { ImagePreview } from 'vant'
 import FollowUser from '@/components/follow-user'
+import CollectArticle from '@/components/collect-article'
+import LikeArticle from '@/components/like-article'
 export default {
   name: 'ArticleIndex',
   components: {
-    FollowUser
+    FollowUser,
+    CollectArticle,
+    LikeArticle
   },
   props: {
     articleId: {
@@ -183,6 +193,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import "./github-markdown.css";
 .article-container {
   .main-wrap {
     position: fixed;
@@ -293,6 +304,51 @@ export default {
         font-size: 16px;
         background-color: #e22829;
       }
+    }
+  }
+  .article-bottom {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    height: 88px;
+    border-top: 1px solid #d8d8d8;
+    background-color: #fff;
+    .comment-btn {
+      width: 282px;
+      height: 46px;
+      border: 2px solid #eeeeee;
+      font-size: 30px;
+      line-height: 46px;
+      color: #a7a7a7;
+    }
+    /deep/ .van-icon {
+      font-size: 40px;
+    }
+    .comment-icon {
+      top: 2px;
+      color: #777;
+      .van-info {
+        font-size: 16px;
+        background-color: #e22829;
+      }
+    }
+    .btn-item {
+      border: none;
+      padding: 0;
+      height: 40px;
+      line-height: 40px;
+      color: #777777
+    }
+    .collect-btn--collected {
+      color: #ffa500;
+    }
+    .like-btn--liked {
+      color: #e5645f;
     }
   }
 }
