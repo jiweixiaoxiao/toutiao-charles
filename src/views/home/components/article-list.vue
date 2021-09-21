@@ -16,11 +16,11 @@
       error-text="请求失败，点击重新加载"
       @load="onLoad"
     >
-<!--      <van-cell
-        v-for="(article, index) in list"
-        :key="index"
-        :title="article.title"
-      />-->
+      <!--      <van-cell
+              v-for="(article, index) in list"
+              :key="index"
+              :title="article.title"
+            />-->
       <article-item
         v-for="(article, index) in list"
         :key="index"
@@ -31,66 +31,73 @@
 </template>
 
 <script>
-import { getArticles } from '@/api/article'
-import ArticleItem from '@/components/article-item'
-export default {
-  name: 'ArticleList',
-  components: {
-    ArticleItem
-  },
-  props: {
-    channel: {
-      type: Object,
-      required: true
-    }
-  },
-  data () {
-    return {
-      list: [], // 文章列表数据
-      loading: false, // 上拉加载更多的 loading 状态
-      finished: false, // 是否加载结束
-      error: false, // 是否加载失败
-      timestamp: null // 请求下一页数据的时间戳
-    }
-  },
-  computed: {},
-  watch: {},
-  created () {},
-  mounted () {},
-  methods: {
-    // 当触发上拉加载更多的时候调用该函数
-    async onLoad () {
-      try {
-        // 1. 请求获取数据
-        const { data } = await getArticles({
-          channel_id: this.channel.id, // 频道 id
-          timestamp: this.timestamp || Date.now(), // 时间戳，请求新的推荐数据传当前的时间戳，请求历史推荐传指定的时间戳
-          with_top: 1 // 是否包含置顶，进入页面第一次请求时要包含置顶文章，1-包含置顶，0-不包含
-        })
+  import { getArticles } from '@/api/article'
+  import ArticleItem from '@/components/article-item'
 
-        // 2. 把数据添加到 list 数组中
-        const { results } = data.data
-        this.list.push(...results)
-
-        // 3. 设置本次加载中 loading 状态结束
-        this.loading = false
-
-        // 4. 判断数据是否加载结束
-        if (results.length) {
-          // 更新获取下一页数据的时间戳
-          this.timestamp = data.data.pre_timestamp
-        } else {
-          // 没有数据了，设置加载状态结束，不再触发上拉加载更多了
+  export default {
+    name: 'ArticleList',
+    components: {
+      ArticleItem
+    },
+    props: {
+      channel: {
+        type: Object,
+        required: true
+      }
+    },
+    data () {
+      return {
+        list: [], // 文章列表数据
+        loading: false, // 上拉加载更多的 loading 状态
+        finished: false, // 是否加载结束
+        error: false, // 是否加载失败
+        timestamp: null // 请求下一页数据的时间戳
+      }
+    },
+    computed: {},
+    watch: {},
+    created () {
+    },
+    mounted () {
+    },
+    methods: {
+      // 当触发上拉加载更多的时候调用该函数
+      async onLoad () {
+        try {
+          // 1. 请求获取数据
+          const { data } = await getArticles({
+            channel_id: this.channel.id, // 频道 id
+            timestamp: this.timestamp || Date.now(), // 时间戳，请求新的推荐数据传当前的时间戳，请求历史推荐传指定的时间戳
+            with_top: 1 // 是否包含置顶，进入页面第一次请求时要包含置顶文章，1-包含置顶，0-不包含
+          })
+          console.log(data.data)
+          // 2. 把数据添加到 list 数组中
+          const results = data.data
+          for (const key in results) {
+            this.list.push(results[key])
+            console.log(results[key])
+          }
+          // this.list.push(...results)
+          console.log(this.list)
+          // 3. 设置本次加载中 loading 状态结束
+          this.loading = false
           this.finished = true
+          // 4. 判断数据是否加载结束
+          // if (results.length) {
+          //   // 更新获取下一页数据的时间戳
+          //   this.timestamp = data.data.pre_timestamp
+          // } else {
+          //   // 没有数据了，设置加载状态结束，不再触发上拉加载更多了
+          //   this.finished = true
+          // }
+        } catch (err) {
+          console.log(err)
+          this.loading = false // 关闭 loading 效果
+          this.error = true // 开启错误提示
         }
-      } catch (err) {
-        console.log(err)
-        this.loading = false // 关闭 loading 效果
-        this.error = true // 开启错误提示
       }
     }
   }
-}
 </script>
 
 <style scoped lang="less"></style>

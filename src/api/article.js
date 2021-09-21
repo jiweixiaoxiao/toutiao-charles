@@ -9,7 +9,7 @@ import request from '@/utils/request'
 export const getArticles = params => {
   return request({
     method: 'GET',
-    url: '/app/v1_1/articles',
+    url: '/api/v1/article/load',
     // params 选项用来配置 Query 参数
     params
   })

@@ -8,16 +8,16 @@
       // 传递路由动态参数
       params: {
         // 属性名：路由路径中设计的动态参数名称
-        articleId: article.art_id
+        articleId: article.id
       }
     }"
   >
     <div slot="title" class="title van-multi-ellipsis--l2">{{ article.title }}</div>
     <div slot="label">
-      <div v-if="article.cover.type === 3" class="cover-wrap">
+      <div v-if="article.flag === 6" class="cover-wrap">
         <div
           class="cover-item"
-          v-for="(img, index) in article.cover.images"
+          v-for="(img, index) in article.images"
           :key="index"
         >
           <van-image
@@ -28,13 +28,13 @@
         </div>
       </div>
       <div class="label-info-wrap">
-        <span>{{ article.aut_name }}</span>
-        <span>{{ article.comm_count }}评论</span>
-        <span>{{ article.pubdate }}</span>
+        <span>{{ article.author_id }}</span>
+        <span>{{ article.comment }}评论</span>
+        <span>{{ article.publish_time }}</span>
       </div>
     </div>
     <van-image
-      v-if="article.cover.type === 1"
+      v-if="article.flag === 1"
       slot="default"
       class="right-cover"
       fit="cover"
