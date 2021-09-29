@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <van-nav-bar class="page-nav-bar" title="登陆">
+    <van-nav-bar id="page-nav-bar" title="登陆">
       <van-icon
         slot="left"
         name="cross"
@@ -28,13 +28,13 @@
         maxlength="6"
       >
         <i slot="left-icon" class="toutiao toutiao-yanzhengma"></i>
-        <van-count-down
+<!--        <van-count-down
           v-if="isCountDownShow"
           slot="button"
           :time="1000 * 5"
           format="ss s"
           @finish="isCountDownShow = false"
-        />
+        />-->
         <template #button>
           <!--
             time: 倒计时时间
@@ -104,6 +104,7 @@ export default {
   mounted () {
   },
   methods: {
+    // 登录成功的方法
     async onLogin () {
       // 开始转圈圈
       this.$toast.loading({
@@ -114,6 +115,7 @@ export default {
       try {
         // const res = await login(this.user)
         const { data } = await login(this.user)
+        // 将user的数据存到Vuex.Store中
         this.$store.commit('setUser', data.data)
         this.$toast.success('登录成功')
         // 登录成功，跳转回原来页面
@@ -129,22 +131,22 @@ export default {
         }
       }
     },
+    // 发送手机验证码的方法
     async onSendSms () {
       try {
-        console.log(this.user.mobile)
-        // 这里的mobile对应的是上面表单中mobile行的name="mobile"属性
+        // 验证手机号： 这里的mobile对应的是上面表单中mobile行的name="mobile"属性
         await this.$refs.loginForm.validate('mobile')
         // await this.$refs.loginForm.validate('user.mobile')
       } catch (err) {
         return console.log('验证失败', err)
       }
-
+      // 显示倒计时
       this.isCountDownShow = true
       try {
+        // 请求发送验证码
         await getSmsCode(this.user.mobile)
       } catch (err) {
         this.isCountDownShow = false
-        console.log('---------' + err)
         if (err.response.status === 429) {
           this.$toast('发送太频繁了，请稍后再试')
         } else {

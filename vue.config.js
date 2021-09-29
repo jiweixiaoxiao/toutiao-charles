@@ -1,6 +1,6 @@
 // module.exports = {
 //   devServer: {
-//     proxy: 'http://ttapi.research.itcast.cn/'
+//     proxy: 'http://toutiao-app.itheima.net/'
 //     //http://ttapi.research.itcast.cn/app/v1_0/sms/codes
 //   }
 // }
