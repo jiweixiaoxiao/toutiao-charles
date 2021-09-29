@@ -54,7 +54,7 @@ import { getUserChannels } from '@/api/user'
 import ArticleList from './components/article-list'
 import ChannelEdit from './components/channel-edit'
 import { mapState } from 'vuex'
-import { getItem } from '@/utils/storage'
+// import { getItem } from '@/utils/storage'
 
 export default {
   name: 'HomePage',
@@ -85,8 +85,11 @@ export default {
         // const { data } = await getUserChannels()
         // this.channels = data.data.channels
         let channels = []
-
-        if (this.user) {
+        const { data } = await getUserChannels()
+        console.log(data.data)
+        channels = data.data
+        this.channels = channels
+        /* if (this.user) {
           // 已登录，请求获取用户频道列表
           const { data } = await getUserChannels()
           channels = data.data.channels
@@ -99,11 +102,10 @@ export default {
           } else {
             //    没有，请求获取默认频道列表
             const { data } = await getUserChannels()
-            channels = data.data.channels
+            // channels = data.data.channels
+            console.log('-------------------' + data.data)
           }
-        }
-
-        this.channels = channels
+        } */
       } catch (err) {
         this.$toast('获取频道数据失败')
       }
