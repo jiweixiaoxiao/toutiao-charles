@@ -1,3 +1,6 @@
+/**
+ * 获取数据
+ */
 export const getItem = name => {
   const data = window.localStorage.getItem(name)
   try {
@@ -7,6 +10,11 @@ export const getItem = name => {
   }
 }
 
+/**
+ * 存储数据
+ * @param name
+ * @param value
+ */
 export const setItem = (name, value) => {
   if (typeof value === 'object') {
     value = JSON.stringify(value)
@@ -14,6 +22,10 @@ export const setItem = (name, value) => {
   window.localStorage.setItem(name, value)
 }
 
+/**
+ * 删除数据
+ * @param name
+ */
 export const removeItem = name => {
   window.localStorage.removeItem(name)
 }
