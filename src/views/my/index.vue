@@ -6,7 +6,15 @@
         <div class="left">
           <van-image
             class="avatar"
+            v-if="userInfo.photo != 'http://toutiao-img.itheima.net/Fkj6tQi3xJwVXi1u2swCElotfdCi'"
             :src="userInfo.photo"
+            round
+            fit="cover"
+          />
+          <van-image
+            class="avatar"
+            v-else
+            src='https://jiweixiaoxiao.oss-cn-qingdao.aliyuncs.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20210930181204.jpg'
             round
             fit="cover"
           />
@@ -86,6 +94,7 @@ export default {
     }
   },
   computed: {
+    // 三个点的意思...对数组和对象而言，就是将运算符后面的变量里东西每一项拆下来。
     ...mapState(['user'])
   },
   watch: {},
@@ -134,11 +143,14 @@ export default {
 
   .not-login {
     display: flex;
+    // 水平居中
     justify-content: center;
+    // 垂直居中
     align-items: center;
 
     .login-btn {
       display: flex;
+      // 默认是水平排列，设置垂直排列
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -182,8 +194,10 @@ export default {
     .base-info {
       height: 231px;
       padding: 76px 32px 23px;
+      // 将盒子的padding的内边距计算到盒子的宽高中，避免盒子被padding的值挤开。
       box-sizing: border-box;
       display: flex;
+      // space-between表示往两边撑开
       justify-content: space-between;
       align-items: center;
       .left {
@@ -208,6 +222,7 @@ export default {
         height: 130px;
         flex: 1;
         display: flex;
+        // column是设置垂直分布
         flex-direction: column;
         justify-content: center;
         align-items: center;
