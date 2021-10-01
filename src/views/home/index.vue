@@ -12,17 +12,17 @@
       </van-button>
     </van-nav-bar>
     <!-- /导航栏 -->
-    <van-tabs class="channel-tabs" v-model="active" animated swipeable>
+    <van-tabs class="channel-tabs" v-model="active" swipeable>
       <van-tab
         :title="channel.name"
         v-for="channel in channels"
         :key="channel.id"
       >
         <!-- 文章列表 -->
-        <article-list ref="article-list" :channel="channel"/>
+        <article-list ref="article-list" :channel="channel" />
         <!-- 文章列表 -->
       </van-tab>
-<!--      <div slot="nav-right" class="placeholder"></div>-->
+      <div slot="nav-right" class="placeholder"></div>
       <div
         slot="nav-right"
         class="hamburger-btn"
@@ -55,10 +55,10 @@ import { getUserChannels } from '@/api/user'
 import ArticleList from './components/article-list'
 import ChannelEdit from './components/channel-edit'
 import { mapState } from 'vuex'
-// import { getItem } from '@/utils/storage'
+import { getItem } from '@/utils/storage'
 
 export default {
-  name: 'HomePage',
+  name: 'HomeIndex',
   components: {
     ArticleList,
     ChannelEdit
@@ -86,11 +86,8 @@ export default {
         // const { data } = await getUserChannels()
         // this.channels = data.data.channels
         let channels = []
-        const { data } = await getUserChannels()
-        console.log(data.data)
-        channels = data.data
-        this.channels = channels
-        /* if (this.user) {
+
+        if (this.user) {
           // 已登录，请求获取用户频道列表
           const { data } = await getUserChannels()
           channels = data.data.channels
@@ -103,14 +100,16 @@ export default {
           } else {
             //    没有，请求获取默认频道列表
             const { data } = await getUserChannels()
-            // channels = data.data.channels
-            console.log('-------------------' + data.data)
+            channels = data.data.channels
           }
-        } */
+        }
+
+        this.channels = channels
       } catch (err) {
         this.$toast('获取频道数据失败')
       }
     },
+
     onUpdateActive (index, isChennelEditShow = true) {
       // 更新激活的频道项
       this.active = index
@@ -174,7 +173,11 @@ export default {
       height: 6px;
       background-color: #3296fa;
     }
-
+    .placeholder {
+      flex-shrink: 0;
+      width: 66px;
+      height: 82px;
+    }
     .hamburger-btn {
       position: fixed;
       right: 0;
@@ -201,10 +204,6 @@ export default {
       }
     }
   }
-  //.placeholder {
-  //  flex-shrink: 0;
-  //  width: 66px;
-  //  height: 82px;
-  //}
+
 }
 </style>

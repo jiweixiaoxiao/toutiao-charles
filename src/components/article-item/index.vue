@@ -8,7 +8,7 @@
       // 传递路由动态参数
       params: {
         // 属性名：路由路径中设计的动态参数名称
-        articleId: article.id
+        articleId: article.art_id
       }
     }"
   >
@@ -28,13 +28,13 @@
         </div>
       </div>
       <div class="label-info-wrap">
-        <span>{{ article.author_id }}</span>
-        <span>{{ article.comment }}评论</span>
-        <span>{{ article.publish_time }}</span>
+        <span>{{ article.aut_name }}</span>
+        <span>{{ article.comm_count }}评论</span>
+        <span>{{ article.pubdate }}</span>
       </div>
     </div>
     <van-image
-      v-if="article.flag === 1"
+      v-if="article.cover.type != 0"
       slot="default"
       class="right-cover"
       fit="cover"
