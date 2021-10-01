@@ -153,30 +153,28 @@ export default {
       right: 0;
       height: 82px;
     }
-  }
+    .van-tab {
+      border-right: 1px solid #edeff3;
+      min-width: 200px;
+      font-size: 30px;
+      color: #777777;
+    }
 
-  .van-tab {
-    border-right: 1px solid #edeff3;
-    min-width: 200px;
-    font-size: 30px;
-    color: #777777;
-  }
+    .van-tab--active {
+      color: #333333;
+    }
 
-  .van-tab--active {
-    color: #333333;
-  }
+    .van-tabs__nav {
+      padding-bottom: 0;
+    }
 
-  .van-tabs__nav {
-    padding-bottom: 0;
+    .van-tabs__line {
+      bottom: 8px;
+      width: 31px !important;
+      height: 6px;
+      background-color: #3296fa;
+    }
   }
-
-  .van-tabs__line {
-    bottom: 8px;
-    width: 31px !important;
-    height: 6px;
-    background-color: #3296fa;
-  }
-
   .placeholder {
     flex-shrink: 0;
     width: 66px;
