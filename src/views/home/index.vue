@@ -8,7 +8,8 @@
         size="small"
         round
         icon="search"
-      >搜索</van-button>
+      >搜索
+      </van-button>
     </van-nav-bar>
     <!-- /导航栏 -->
     <van-tabs class="channel-tabs" v-model="active" animated swipeable>
@@ -18,7 +19,7 @@
         :key="channel.id"
       >
         <!-- 文章列表 -->
-        <article-list ref="article-list" :channel="channel" />
+        <article-list ref="article-list" :channel="channel"/>
         <!-- 文章列表 -->
       </van-tab>
       <div slot="nav-right" class="placeholder"></div>
@@ -125,17 +126,18 @@ export default {
 .home-container {
   padding-top: 174px;
   padding-bottom: 100px;
-  .van-nav-bar__title {
-    max-width: unset;
-  }
-  .page-nav-bar{
+  /deep/ .page-nav-bar {
     background-color: #3296fa;
+    .van-nav-bar__title {
+      max-width: unset;
+    }
     .search-btn {
       width: 555px;
       height: 64px;
       background-color: #5babfb;
       border: none;
       font-size: 28px;
+
       .van-icon {
         font-size: 32px;
       }
@@ -191,9 +193,11 @@ export default {
     height: 82px;
     background-color: #fff;
     background-color: rgba(255, 255, 255, 0.902);
+
     i.toutiao {
       font-size: 33px;
     }
+
     &:before {
       content: "";
       position: absolute;
